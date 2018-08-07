@@ -1,11 +1,12 @@
-package io.joshatron.player;
+package io.joshatron.takai.player;
 
-import io.joshatron.engine.GameResult;
-import io.joshatron.engine.GameState;
-import io.joshatron.engine.Player;
-import io.joshatron.engine.Turn;
-import io.joshatron.neuralnet.FeedForwardNeuralNetwork;
-import io.joshatron.neuralnet.NetUtils;
+import io.joshatron.takengine.engine.GameResult;
+import io.joshatron.takengine.engine.GameState;
+import io.joshatron.takengine.engine.Player;
+import io.joshatron.takengine.player.TakPlayer;
+import io.joshatron.takengine.turn.Turn;
+import io.joshatron.takai.neuralnet.FeedForwardNeuralNetwork;
+import io.joshatron.takai.neuralnet.NetUtils;
 
 public class MiniMaxPlayer implements TakPlayer {
 

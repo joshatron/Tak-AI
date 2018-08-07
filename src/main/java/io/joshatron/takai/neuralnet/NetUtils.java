@@ -1,8 +1,8 @@
-package io.joshatron.neuralnet;
+package io.joshatron.takai.neuralnet;
 
-import io.joshatron.engine.GameState;
-import io.joshatron.engine.Piece;
-import io.joshatron.engine.PieceType;
+import io.joshatron.takengine.engine.GameState;
+import io.joshatron.takengine.board.Piece;
+import io.joshatron.takengine.board.PieceType;
 
 import java.io.File;
 import java.io.IOException;

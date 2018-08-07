@@ -1,6 +1,6 @@
-package io.joshatron.neuralnet;
+package io.joshatron.takai.neuralnet;
 
-import io.joshatron.engine.WinReason;
+import io.joshatron.takengine.engine.WinReason;
 
 public class RateNetResults {
     private int gamesWon;

@@ -1,8 +1,8 @@
-package io.joshatron.neuralnet;
+package io.joshatron.takai.neuralnet;
 
-import io.joshatron.engine.GameState;
-import io.joshatron.engine.Player;
-import io.joshatron.player.SimpleNeuralPlayer;
+import io.joshatron.takengine.engine.GameState;
+import io.joshatron.takengine.engine.Player;
+import io.joshatron.takai.player.SimpleNeuralPlayer;
 
 import java.io.File;
 import java.util.ArrayList;

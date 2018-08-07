@@ -1,4 +1,4 @@
-package io.joshatron.neuralnet;
+package io.joshatron.takai.neuralnet;
 
 public class NetWithStats {
 

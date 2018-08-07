@@ -1,13 +1,12 @@
-package io.joshatron.neuralnet;
+package io.joshatron.takai.neuralnet;
 
-import io.joshatron.engine.*;
-import io.joshatron.player.SimpleNeuralPlayer;
+import io.joshatron.takengine.engine.*;
+import io.joshatron.takai.player.SimpleNeuralPlayer;
+import io.joshatron.takengine.turn.Turn;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.Scanner;
 
 public class BackPropTrainer {
 

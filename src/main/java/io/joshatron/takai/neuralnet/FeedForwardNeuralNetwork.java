@@ -1,4 +1,4 @@
-package io.joshatron.neuralnet;
+package io.joshatron.takai.neuralnet;
 
 import org.apache.commons.io.FileUtils;
 import org.json.JSONArray;

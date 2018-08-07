@@ -1,7 +1,8 @@
-package io.joshatron.player;
+package io.joshatron.takai.player;
 
-import io.joshatron.engine.GameState;
-import io.joshatron.engine.Turn;
+import io.joshatron.takengine.engine.GameState;
+import io.joshatron.takengine.player.TakPlayer;
+import io.joshatron.takengine.turn.Turn;
 
 import java.util.ArrayList;
 import java.util.Random;

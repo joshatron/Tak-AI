@@ -1,4 +1,4 @@
-package io.joshatron.neuralnet;
+package io.joshatron.takai.neuralnet;
 
 import java.util.ArrayList;
 
