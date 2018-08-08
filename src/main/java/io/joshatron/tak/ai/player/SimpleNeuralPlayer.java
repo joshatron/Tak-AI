@@ -1,10 +1,10 @@
-package io.joshatron.takai.player;
+package io.joshatron.tak.ai.player;
 
-import io.joshatron.takengine.engine.GameState;
-import io.joshatron.takengine.player.TakPlayer;
-import io.joshatron.takengine.turn.Turn;
-import io.joshatron.takai.neuralnet.FeedForwardNeuralNetwork;
-import io.joshatron.takai.neuralnet.NetUtils;
+import io.joshatron.tak.engine.game.GameState;
+import io.joshatron.tak.engine.player.TakPlayer;
+import io.joshatron.tak.engine.turn.Turn;
+import io.joshatron.tak.ai.neuralnet.FeedForwardNeuralNetwork;
+import io.joshatron.tak.ai.neuralnet.NetUtils;
 
 import java.util.ArrayList;
 

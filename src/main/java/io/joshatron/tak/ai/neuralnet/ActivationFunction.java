@@ -1,4 +1,4 @@
-package io.joshatron.takai.neuralnet;
+package io.joshatron.tak.ai.neuralnet;
 
 public enum ActivationFunction
 {

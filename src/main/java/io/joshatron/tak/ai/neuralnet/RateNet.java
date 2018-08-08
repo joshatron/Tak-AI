@@ -1,12 +1,12 @@
-package io.joshatron.takai.neuralnet;
+package io.joshatron.tak.ai.neuralnet;
 
-import io.joshatron.takengine.engine.GameResult;
-import io.joshatron.takengine.engine.GameState;
-import io.joshatron.takengine.engine.Player;
-import io.joshatron.takengine.turn.Turn;
-import io.joshatron.takai.player.RandomPlayer;
-import io.joshatron.takai.player.SimpleNeuralPlayer;
-import io.joshatron.takengine.player.TakPlayer;
+import io.joshatron.tak.engine.game.GameResult;
+import io.joshatron.tak.engine.game.GameState;
+import io.joshatron.tak.engine.game.Player;
+import io.joshatron.tak.engine.turn.Turn;
+import io.joshatron.tak.ai.player.RandomPlayer;
+import io.joshatron.tak.ai.player.SimpleNeuralPlayer;
+import io.joshatron.tak.engine.player.TakPlayer;
 
 public class RateNet {
 
