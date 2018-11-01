@@ -90,7 +90,7 @@
                   <configuration>
                       <archive>
                           <manifest>
-                              <mainClass>io.joshatron.tak.cli.app.App</mainClass>
+                              <mainClass>io.joshatron.tak.ai.cli.App</mainClass>
                           </manifest>
                       </archive>
                   </configuration>
