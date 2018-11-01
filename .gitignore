@@ -1,8 +1,6 @@
 .idea/
 target/
 /trainer/
-/cli/
-/server/
 *.json
 dependency-reduced-pom.xml
 *.iml
