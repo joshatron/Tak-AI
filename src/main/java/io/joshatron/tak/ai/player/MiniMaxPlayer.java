@@ -5,21 +5,19 @@ import io.joshatron.tak.engine.game.GameState;
 import io.joshatron.tak.engine.game.Player;
 import io.joshatron.tak.engine.player.TakPlayer;
 import io.joshatron.tak.engine.turn.Turn;
-import io.joshatron.tak.ai.neuralnet.FeedForwardNeuralNetwork;
-import io.joshatron.tak.ai.neuralnet.NetUtils;
 
 public class MiniMaxPlayer implements TakPlayer {
 
-    FeedForwardNeuralNetwork net;
+    private Evaluator evaluator;
+    private int depth;
 
-    public MiniMaxPlayer(FeedForwardNeuralNetwork net) {
-        this.net = net;
+    public MiniMaxPlayer(Evaluator evaluator, int depth) {
+        this.evaluator = evaluator;
+        this.depth = depth;
     }
 
     @Override
     public Turn getTurn(GameState state) {
-        int depth = 2;
-
         double alpha = -9999;
         double beta = 9999;
 
@@ -27,7 +25,7 @@ public class MiniMaxPlayer implements TakPlayer {
         Turn bestTurn = null;
         for(Turn turn : state.getPossibleTurns()) {
             state.executeTurn(turn);
-            double value = getTurnValue(state, false, !state.isWhiteTurn(), depth, alpha, beta);
+            double value = getTurnValue(state, false, state.getCurrentPlayer().other(), depth, alpha, beta);
 
             if(value > best) {
                 best = value;
@@ -40,34 +38,17 @@ public class MiniMaxPlayer implements TakPlayer {
         return bestTurn;
     }
 
-    private double getTurnValue(GameState state, boolean max, boolean white, int depth, double alpha, double beta) {
+    private double getTurnValue(GameState state, boolean max, Player player, int depth, double alpha, double beta) {
         GameResult result = state.checkForWinner();
-        if(result.isFinished() && result.getWinner() == Player.WHITE) {
-            if(white) {
-                return 999;
-            }
-            else {
-                return -999;
-            }
+        if(result.isFinished() && result.getWinner() == player) {
+            return 999;
         }
-        else if(result.isFinished() && result.getWinner() == Player.BLACK) {
-            if(white) {
-                return -999;
-            }
-            else {
-                return 999;
-            }
+        else if(result.isFinished()) {
+            return -999;
         }
 
         if(depth == 0) {
-            double[] out = net.compute(NetUtils.getInputs(state, state.isWhiteTurn()));
-
-            if(state.isWhiteTurn()) {
-                return out[0];
-            }
-            else {
-                return out[1];
-            }
+            return evaluator.evaluate(state, player);
         }
 
         double extreme;
@@ -80,7 +61,7 @@ public class MiniMaxPlayer implements TakPlayer {
 
         for(Turn turn : state.getPossibleTurns()) {
             state.executeTurn(turn);
-            double value = getTurnValue(state, !max, white, depth - 1, alpha, beta);
+            double value = getTurnValue(state, !max, player, depth - 1, alpha, beta);
             if(max) {
                 if(value > extreme) {
                     extreme = value;
