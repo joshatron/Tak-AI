@@ -1,12 +1,13 @@
 package io.joshatron.tak.ai.player;
 
+import io.joshatron.tak.engine.exception.TakEngineException;
 import io.joshatron.tak.engine.game.GameState;
 import io.joshatron.tak.engine.player.TakPlayer;
 import io.joshatron.tak.engine.turn.Turn;
 import io.joshatron.tak.ai.neuralnet.FeedForwardNeuralNetwork;
 import io.joshatron.tak.ai.neuralnet.NetUtils;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class SimpleNeuralPlayer implements TakPlayer {
 
@@ -18,18 +19,23 @@ public class SimpleNeuralPlayer implements TakPlayer {
 
     @Override
     public Turn getTurn(GameState state) {
-        ArrayList<Turn> turns = state.getPossibleTurns();
+        List<Turn> turns = state.getPossibleTurns();
 
         double max = -1;
         Turn maxTurn = null;
         for(Turn turn : turns) {
-            state.executeTurn(turn);
-            double output = computeState(state);
-            if(output > max) {
-                max = output;
-                maxTurn = turn;
+            try {
+                state.executeTurn(turn);
+                double output = computeState(state);
+                if(output > max) {
+                    max = output;
+                    maxTurn = turn;
+                }
+                state.undoTurn();
+            } catch (TakEngineException e) {
+                System.out.println(e.getCode());
+                e.printStackTrace();
             }
-            state.undoTurn();
         }
 
         return maxTurn;

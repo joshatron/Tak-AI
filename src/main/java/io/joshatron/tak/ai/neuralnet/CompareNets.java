@@ -1,5 +1,6 @@
 package io.joshatron.tak.ai.neuralnet;
 
+import io.joshatron.tak.engine.exception.TakEngineException;
 import io.joshatron.tak.engine.game.GameState;
 import io.joshatron.tak.engine.game.Player;
 import io.joshatron.tak.ai.player.SimpleNeuralPlayer;
@@ -14,7 +15,7 @@ import java.util.Comparator;
  */
 public class CompareNets {
 
-    public static void compareAllNets() {
+    public static void compareAllNets() throws TakEngineException {
         ArrayList<NetWithStats> nets = new ArrayList<>();
 
         //Collect all networks

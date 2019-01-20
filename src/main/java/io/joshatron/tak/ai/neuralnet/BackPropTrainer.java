@@ -1,5 +1,6 @@
 package io.joshatron.tak.ai.neuralnet;
 
+import io.joshatron.tak.engine.exception.TakEngineException;
 import io.joshatron.tak.engine.game.*;
 import io.joshatron.tak.ai.player.SimpleNeuralPlayer;
 import io.joshatron.tak.engine.turn.Turn;
@@ -11,7 +12,7 @@ import java.util.Date;
 public class BackPropTrainer {
 
     public static void train(double inGameRate, double afterGameRate, double momentum,
-                             int hiddenSize, int games, int boardSize) {
+                             int hiddenSize, int games, int boardSize) throws TakEngineException {
         System.out.println("Initializing training...");
         String label = "master";
 
@@ -57,7 +58,7 @@ public class BackPropTrainer {
         }
     }
 
-    private static void playGame(FeedForwardNeuralNetwork net, double inGameRate, double afterGameRate, boolean pathOnly, int boardSize) {
+    private static void playGame(FeedForwardNeuralNetwork net, double inGameRate, double afterGameRate, boolean pathOnly, int boardSize) throws TakEngineException {
         net.setLearningRate(inGameRate);
         GameState state = new GameState(Player.WHITE, boardSize);
         SimpleNeuralPlayer player = new SimpleNeuralPlayer(net);
@@ -69,7 +70,7 @@ public class BackPropTrainer {
             }
             round++;
             double[] lastInputs = NetUtils.getInputs(state, state.isWhiteTurn());
-            Turn turn = player.getTurn((GameState)state.clone());
+            Turn turn = player.getTurn(new GameState(state, true));
 
             if(turn != null) {
                 state.executeTurn(turn);

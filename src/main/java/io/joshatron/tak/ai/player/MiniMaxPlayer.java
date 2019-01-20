@@ -1,5 +1,6 @@
 package io.joshatron.tak.ai.player;
 
+import io.joshatron.tak.engine.exception.TakEngineException;
 import io.joshatron.tak.engine.game.GameResult;
 import io.joshatron.tak.engine.game.GameState;
 import io.joshatron.tak.engine.game.Player;
@@ -24,21 +25,26 @@ public class MiniMaxPlayer implements TakPlayer {
         double best = -9999;
         Turn bestTurn = null;
         for(Turn turn : state.getPossibleTurns()) {
-            state.executeTurn(turn);
-            double value = getTurnValue(state, false, state.getCurrentPlayer().other(), depth, alpha, beta);
+            try {
+                state.executeTurn(turn);
+                double value = getTurnValue(state, false, state.getCurrentPlayer().opposite(), depth, alpha, beta);
 
-            if(value > best) {
-                best = value;
-                bestTurn = turn;
+                if(value > best) {
+                    best = value;
+                    bestTurn = turn;
+                }
+
+                state.undoTurn();
+            } catch (TakEngineException e) {
+                System.out.println(e.getCode());
+                e.printStackTrace();
             }
-
-            state.undoTurn();
         }
 
         return bestTurn;
     }
 
-    private double getTurnValue(GameState state, boolean max, Player player, int depth, double alpha, double beta) {
+    private double getTurnValue(GameState state, boolean max, Player player, int depth, double alpha, double beta) throws TakEngineException {
         GameResult result = state.checkForWinner();
         if(result.isFinished() && result.getWinner() == player) {
             return 999;

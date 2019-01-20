@@ -1,5 +1,6 @@
 package io.joshatron.tak.ai.neuralnet;
 
+import io.joshatron.tak.engine.exception.TakEngineException;
 import io.joshatron.tak.engine.game.GameResult;
 import io.joshatron.tak.engine.game.GameState;
 import io.joshatron.tak.engine.game.Player;
@@ -12,7 +13,7 @@ public class RateNet {
 
     //Returns a value between 0 and 100
     //Represents the win percentage against a random player
-    public static RateNetResults getWinPercent(FeedForwardNeuralNetwork net, int boardSize) {
+    public static RateNetResults getWinPercent(FeedForwardNeuralNetwork net, int boardSize) throws TakEngineException {
         TakPlayer white = new SimpleNeuralPlayer(net);
         TakPlayer black = new RandomPlayer();
         Player first = Player.BLACK;
@@ -28,11 +29,11 @@ public class RateNet {
             GameState state = new GameState(first, boardSize);
             while(!state.checkForWinner().isFinished()) {
                 if(state.isWhiteTurn()) {
-                    Turn turn = white.getTurn((GameState)state.clone());
+                    Turn turn = white.getTurn(new GameState(state, true));
                     state.executeTurn(turn);
                 }
                 else {
-                    Turn turn = black.getTurn((GameState)state.clone());
+                    Turn turn = black.getTurn(new GameState(state, true));
                     state.executeTurn(turn);
                 }
             }

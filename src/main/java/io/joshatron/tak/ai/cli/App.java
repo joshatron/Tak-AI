@@ -1,6 +1,7 @@
 package io.joshatron.tak.ai.cli;
 
 import io.joshatron.tak.ai.neuralnet.*;
+import io.joshatron.tak.engine.exception.TakEngineException;
 import org.jline.builtins.Completers;
 import org.jline.reader.LineReader;
 import org.jline.reader.LineReaderBuilder;
@@ -51,7 +52,7 @@ public class App {
                     System.out.println("  exit- exits the program.");
                 }
                 else if(input.equals("exit")) {
-                    System.exit(0);
+                    break;
                 }
                 else {
                     System.out.println("Please choose a valid option. Type help to see options.");
@@ -60,10 +61,13 @@ public class App {
         }
         catch(IOException e) {
             e.printStackTrace();
+        } catch (TakEngineException e) {
+            System.out.println(e.getCode());
+            e.printStackTrace();
         }
     }
 
-    private static void rateNet() throws IOException {
+    private static void rateNet() throws IOException, TakEngineException {
         LineReader lineReader = LineReaderBuilder.builder()
                 .terminal(TerminalBuilder.terminal())
                 .completer(new Completers.FilesCompleter(new File("")))
@@ -82,7 +86,7 @@ public class App {
         }
     }
 
-    private static void runTraining() throws IOException {
+    private static void runTraining() throws IOException, TakEngineException {
         LineReader lineReader = LineReaderBuilder.builder()
                 .terminal(TerminalBuilder.terminal())
                 .completer(new NullCompleter())
@@ -179,7 +183,7 @@ public class App {
         BackPropTrainer.train(inGameRate, afterGameRate, momentum, hiddenSize, games, boardSize);
     }
 
-    private static void runTrainingSet() throws IOException {
+    private static void runTrainingSet() throws IOException, TakEngineException {
         LineReader lineReader = LineReaderBuilder.builder()
                 .terminal(TerminalBuilder.terminal())
                 .completer(new NullCompleter())
