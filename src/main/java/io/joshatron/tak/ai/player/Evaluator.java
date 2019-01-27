@@ -12,4 +12,11 @@ public interface Evaluator {
      * @return a number between -100 and 100 for how well the player is doing where negative is worse
      */
     double evaluate(GameState state, Player player);
+
+    /**
+     * This function determines what depth to go based on the size of the board
+     * @param size: the size of the board
+     * @return the depth to go down
+     */
+    int depthFromBoardSize(int size);
 }
