@@ -13,13 +13,15 @@ import java.util.Random;
 
 public class MiniMaxPlayer implements TakPlayer {
 
-    private Evaluator evaluator;
+    private Evaluator leafEvaluator;
+    private Evaluator finalEvaluator;
     private int depth;
     private Random rand;
 
-    public MiniMaxPlayer(Evaluator evaluator, int size) {
-        this.evaluator = evaluator;
-        this.depth = evaluator.depthFromBoardSize(size);
+    public MiniMaxPlayer(Evaluator leafEvaluator, Evaluator finalEvaluator, int size) {
+        this.leafEvaluator = leafEvaluator;
+        this.finalEvaluator = finalEvaluator;
+        this.depth = leafEvaluator.depthFromBoardSize(size);
         this.rand = new Random();
     }
 
@@ -47,12 +49,37 @@ public class MiniMaxPlayer implements TakPlayer {
                 state.undoTurn();
             } catch (TakEngineException e) {
                 System.out.println(e.getCode());
-                e.printStackTrace();
             }
         }
 
         if(bestTurns.size() > 1) {
-            return bestTurns.get(rand.nextInt(bestTurns.size()));
+            best = -9999;
+            ArrayList<Turn> finalTurns = new ArrayList<>();
+            for(Turn turn : bestTurns) {
+                try {
+                    state.executeTurn(turn);
+                    double value = finalEvaluator.evaluate(state, state.getCurrentPlayer());
+
+                    if(Math.abs(value - best) < .00001) {
+                        finalTurns.add(turn);
+                    } else if(value > best) {
+                        best = value;
+                        finalTurns = new ArrayList<>();
+                        finalTurns.add(turn);
+                    }
+
+                    state.undoTurn();
+                }
+                catch(TakEngineException e) {
+                    System.out.println(e.getCode());
+                }
+            }
+
+            if(finalTurns.size() > 1) {
+                return finalTurns.get(rand.nextInt(finalTurns.size()));
+            } else {
+                return finalTurns.get(0);
+            }
         }
         else {
             return bestTurns.get(0);
@@ -69,7 +96,7 @@ public class MiniMaxPlayer implements TakPlayer {
         }
 
         if(depth == 0) {
-            return evaluator.evaluate(state, player);
+            return leafEvaluator.evaluate(state, player);
         }
 
         double extreme;

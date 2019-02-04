@@ -2,6 +2,7 @@ package io.joshatron.tak.ai.player;
 
 import io.joshatron.tak.ai.player.evaluators.DefensiveEvaluator;
 import io.joshatron.tak.ai.player.evaluators.PatternEvaluator;
+import io.joshatron.tak.ai.player.evaluators.ZeroEvaluator;
 import io.joshatron.tak.engine.game.Player;
 import io.joshatron.tak.engine.player.TakPlayer;
 
@@ -12,9 +13,9 @@ public class AIFactory {
             case RANDOM:
                 return new RandomPlayer();
             case DEFENSIVE_MINIMAX:
-                return new MiniMaxPlayer(new DefensiveEvaluator(), size);
+                return new MiniMaxPlayer(new DefensiveEvaluator(), new ZeroEvaluator(), size);
             case AGGRESIVE_MINIMAX:
-                return new MiniMaxPlayer(new PatternEvaluator(), size);
+                return new MiniMaxPlayer(new PatternEvaluator(), new PatternEvaluator(), size);
             default:
                 return null;
         }
