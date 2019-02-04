@@ -1,4 +1,4 @@
-package io.joshatron.tak.ai.player;
+package io.joshatron.tak.ai.player.evaluators;
 
 import io.joshatron.tak.engine.game.GameState;
 import io.joshatron.tak.engine.game.Player;

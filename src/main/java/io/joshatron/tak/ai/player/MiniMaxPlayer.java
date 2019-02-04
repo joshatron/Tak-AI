@@ -1,5 +1,6 @@
 package io.joshatron.tak.ai.player;
 
+import io.joshatron.tak.ai.player.evaluators.Evaluator;
 import io.joshatron.tak.engine.exception.TakEngineException;
 import io.joshatron.tak.engine.game.GameResult;
 import io.joshatron.tak.engine.game.GameState;
