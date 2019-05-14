@@ -6,7 +6,7 @@ import io.joshatron.tak.engine.board.PieceType;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 public class NetUtils {
 
@@ -35,7 +35,7 @@ public class NetUtils {
                     filled++;
 
                     //top piece
-                    ArrayList<Piece> stack = state.getBoard().getPosition(x, y).getPieces();
+                    List<Piece> stack = state.getBoard().getPosition(x, y).getPieces();
                     Piece piece = stack.get(stack.size() - 1);
                     if (piece.isWhite() == whitePlayer) {
                         switch (piece.getType()) {
@@ -154,7 +154,7 @@ public class NetUtils {
             for(int y = 0; y < state.getBoardSize(); y++) {
                 //horizontal power
                 if(state.getBoard().getPosition(x, y).getHeight() != 0) {
-                    ArrayList<Piece> stack = state.getBoard().getPosition(x, y).getPieces();
+                    List<Piece> stack = state.getBoard().getPosition(x, y).getPieces();
                     Piece piece = stack.get(stack.size() - 1);
                     if (piece.isWhite() == whitePlayer) {
                         switch (piece.getType()) {
@@ -184,7 +184,7 @@ public class NetUtils {
                 }
                 //vertical power
                 if(state.getBoard().getPosition(y, x).getHeight() != 0) {
-                    ArrayList<Piece> stack = state.getBoard().getPosition(y, x).getPieces();
+                    List<Piece> stack = state.getBoard().getPosition(y, x).getPieces();
                     Piece piece = stack.get(stack.size() - 1);
                     if (piece.isWhite() == whitePlayer) {
                         switch (piece.getType()) {
